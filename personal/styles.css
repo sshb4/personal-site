@@ -1,0 +1,430 @@
+
+/* This would be in main.css */
+:root {
+    --accent-red: #dc2626;
+    --accent-blue: #1d4ed8;
+    --accent-green: #059669;
+    --accent-purple: #7c3aed;
+    --accent-orange: #ea580c;
+    --text-dark: #111827;
+    --text-medium: #4b5563;
+    --text-light: #6b7280;
+    --bg-cream: #fefdfb;
+    --bg-light: #f9fafb;
+    --border-color: #e5e7eb;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans Pro', -apple-system, sans-serif;
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.masthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2rem 3rem 1rem;
+    border-bottom: 3px solid var(--text-dark);
+    margin-bottom: 2rem;
+}
+
+.site-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+}
+
+.issue-date {
+    font-size: 0.875rem;
+    color: var(--text-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+}
+
+.weather {
+    text-align: right;
+    font-size: 0.875rem;
+    color: var(--text-medium);
+}
+
+.temp {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.magazine-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+.feature-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.story-kicker {
+    color: var(--accent-red);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.story-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.story-lead {
+    font-size: 1.125rem;
+    color: var(--text-medium);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.story-meta {
+    display: flex;
+    gap: 2rem;
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+.story-count {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.feature-image {
+    height: 400px;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.feature-image:hover {
+    transform: scale(1.02);
+}
+
+.image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-image:hover .image-overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 300px;
+    grid-template-rows: auto auto auto;
+    gap: 2rem;
+    grid-template-areas: 
+        "music books photo sidebar"
+        "tech tech photo sidebar"
+        "art art art sidebar";
+}
+
+.music-item { grid-area: music; }
+.books-item { grid-area: books; }
+.photo-item { grid-area: photo; }
+.tech-item { grid-area: tech; }
+.art-item { grid-area: art; }
+.sidebar-content { grid-area: sidebar; }
+
+.collection-item {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.collection-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.1);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.item-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.item-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--border-color);
+}
+
+.item-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+}
+
+.item-description {
+    color: var(--text-medium);
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+}
+
+.item-stats {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.item-visual {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.1;
+    transition: opacity 0.3s ease;
+}
+
+.collection-item:hover .item-visual {
+    opacity: 0.2;
+}
+
+.music-bg { background: var(--accent-red); }
+.books-bg { background: var(--accent-green); }
+.photo-bg { background: var(--accent-purple); }
+.tech-bg { background: var(--accent-blue); }
+.art-bg { background: var(--accent-orange); }
+
+.music-item:hover { border-left: 4px solid var(--accent-red); }
+.books-item:hover { border-left: 4px solid var(--accent-green); }
+.photo-item:hover { border-left: 4px solid var(--accent-purple); }
+.tech-item:hover { border-left: 4px solid var(--accent-blue); }
+.art-item:hover { border-left: 4px solid var(--accent-orange); }
+
+.sidebar-content {
+    background: var(--bg-light);
+    padding: 2rem;
+    height: fit-content;
+    border: 1px solid var(--border-color);
+}
+
+.sidebar-section {
+    margin-bottom: 2.5rem;
+}
+
+.sidebar-section:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-dark);
+}
+
+.recent-list {
+    list-style: none;
+}
+
+.recent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.875rem;
+}
+
+.recent-item:last-child {
+    border-bottom: none;
+}
+
+.recent-title {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.recent-category {
+    color: var(--text-light);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-box {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--text-dark);
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.quick-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quick-link {
+    color: var(--text-medium);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.quick-link:hover {
+    color: var(--accent-blue);
+    border-bottom-color: var(--accent-blue);
+}
+
+.magazine-footer {
+    margin-top: 4rem;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-light);
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--text-light);
+}
+
+@media (max-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "music books"
+            "photo tech"
+            "art art"
+            "sidebar sidebar";
+    }
+}
+
+@media (max-width: 768px) {
+    .masthead {
+        padding: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .site-title {
+        font-size: 2.5rem;
+    }
+    
+    .magazine-layout {
+        padding: 0 1.5rem;
+    }
+    
+    .feature-story {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .story-headline {
+        font-size: 2rem;
+    }
+    
+    .content-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "music"
+            "books"
+            "photo"
+            "tech"
+            "art"
+            "sidebar";
+    }
+    
+    .magazine-footer {
+        padding: 2rem 1.5rem;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
