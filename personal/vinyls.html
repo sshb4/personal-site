@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vinyl Collection</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="masthead">
+        <div class="masthead-left">
+            <h1 class="site-title"><a href="index.html" style="color:inherit; text-decoration:none;">My Vinyl Collection</a></h1>
+        </div>
+    </header>
+    <main class="magazine-layout" style="display: flex; align-items: flex-start;">
+        <div class="main-content">
+            <section>
+                <h2 class="section-title">Owned Vinyls</h2>
+                <table class="vinyl-table" id="ownedTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="name" class="sortable">Name <span class="sort-arrow">↕</span></th>
+                            <th data-sort="artist" class="sortable">Artist <span class="sort-arrow">↕</span></th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>FutureNever</td><td>Daniel Johns</td><td></td></tr>
+                        <tr><td>The Real Me</td><td>Kyle M</td><td></td></tr>
+                        <tr><td>Tragic Kingdom</td><td>No Doubt</td><td></td></tr>
+                        <tr><td>HOPE</td><td>NF</td><td></td></tr>
+                        <tr><td>CLOUDS</td><td>NF</td><td></td></tr>
+                        <tr><td>The Search</td><td>NF</td><td></td></tr>
+                        <tr><td>Perception</td><td>NF</td><td></td></tr>
+                        <tr><td>Mansion</td><td>NF</td><td></td></tr>
+                        <tr><td>Day & Age</td><td>The Killers</td><td></td></tr>
+                        <tr><td>The Desired Effect</td><td>Brandon Flowers</td><td></td></tr>
+                        <tr><td>Flamingo</td><td>Brandon Flowers</td><td></td></tr>
+                        <tr><td>Abbey Road</td><td>The Beatles</td><td></td></tr>
+                        <tr><td>Red</td><td>The Beatles</td><td></td></tr>
+                        <tr><td>Blue</td><td>The Beatles</td><td></td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2 class="section-title">Wishlist</h2>
+                <table class="vinyl-table" id="wishlistTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="name" class="sortable">Name<span class="sort-arrow">↓</span></th>
+                            <th data-sort="artist" class="sortable">Artist<span class="sort-arrow">↓</span></th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Rebel Diamonds</td><td>The Killers</td><td></td></tr>
+                        <tr><td>The Prodigal</td><td>Josiah Queen</td><td></td></tr>
+                        <tr><td>Therapy Session</td><td>NF</td><td></td></tr>
+                        <tr><td>Live from the Royal Albert Hall</td><td>The Killers</td><td></td></tr>
+                        <tr><td>Diorama</td><td>Silverchair</td><td></td></tr>
+                        <tr><td>Static & Silence</td><td>The Sundays</td><td></td></tr>
+                        <tr><td>Battle Born</td><td>The Killers</td><td></td></tr>
+                        <tr><td>Hot Fuss</td><td>The Killers</td><td></td></tr>
+                        <tr><td>Love Like You</td><td>Emma Nissen</td><td></td></tr>
+                        <tr><td>McCartney</td><td>Paul McCartney</td><td></td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Most Recents</h4>
+                <ul class="recent-list">
+                    <li class="recent-item">Tragic Kingdom - No Doubt</li>
+                    <li class="recent-item">Vinyl Name 2</li>
+                    <li class="recent-item">Vinyl Name 3</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Quick Links</h4>
+                <nav class="quick-nav">
+                    <a href="index.html" class="quick-link">Home</a>
+                    <a href="#ownedTable" class="quick-link">Owned</a>
+                    <a href="#wishlistTable" class="quick-link">Wishlist</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+    <footer class="magazine-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 Personal Archive.</p>
+            </div>
+            <div class="footer-right">
+                <p>Last updated August 21st</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Remove JS dynamic rendering; tables are now static HTML for always-visible vinyls.
+        // Sorting for static HTML tables
+        function sortTableBy(tableId, colIdx, asc) {
+            const table = document.getElementById(tableId);
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            rows.sort((a, b) => {
+                let t1 = a.cells[colIdx].textContent.trim().toLowerCase();
+                let t2 = b.cells[colIdx].textContent.trim().toLowerCase();
+                if (t1 < t2) return asc ? -1 : 1;
+                if (t1 > t2) return asc ? 1 : -1;
+                return 0;
+            });
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        // Add click listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Owned table
+            let ownedAsc = {0: false, 1: false};
+            document.querySelectorAll('#ownedTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    ownedAsc[idx] = !ownedAsc[idx];
+                    sortTableBy('ownedTable', idx, ownedAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = ownedAsc[idx] ? '↑' : '↓';
+                    // Reset other arrows
+                    document.querySelectorAll('#ownedTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+            // Wishlist table
+            let wishAsc = {0: false, 1: false};
+            document.querySelectorAll('#wishlistTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    wishAsc[idx] = !wishAsc[idx];
+                    sortTableBy('wishlistTable', idx, wishAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = wishAsc[idx] ? '↑' : '↓';
+                    // Reset other arrows
+                    document.querySelectorAll('#wishlistTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

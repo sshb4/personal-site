@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="masthead">
+        <div class="masthead-left">
+            <h1 class="site-title"><a href="index.html" style="color:inherit; text-decoration:none;">My Books</a></h1>
+        </div>
+    </header>
+    <main class="magazine-layout" style="display: flex; align-items: flex-start;">
+        <div class="main-content">
+            <section>
+                <h2 class="section-title">Books Read</h2>
+                <table class="vinyl-table" id="readTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="title" class="sortable">Title<span class="sort-arrow">↓</span></th>
+                            <th data-sort="author" class="sortable">Author<span class="sort-arrow">↓</span></th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add your read books here as <tr><td>Title</td><td>Author</td><td></td></tr> -->
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2 class="section-title">To Be Read (TBR)</h2>
+                <table class="vinyl-table" id="tbrTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="title" class="sortable">Title<span class="sort-arrow">↓</span></th>
+                            <th data-sort="author" class="sortable">Author<span class="sort-arrow">↓</span></th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Add your TBR books here as <tr><td>Title</td><td>Author</td><td></td></tr> -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Recent Reads</h4>
+                <ul class="recent-list">
+                    <li class="recent-item">Book Title 1</li>
+                    <li class="recent-item">Book Title 2</li>
+                    <li class="recent-item">Book Title 3</li>
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Quick Links</h4>
+                <nav class="quick-nav">
+                    <a href="index.html" class="quick-link">Home</a>
+                    <a href="#readTable" class="quick-link">Read</a>
+                    <a href="#tbrTable" class="quick-link">TBR</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+    <footer class="magazine-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 Personal Archive.</p>
+            </div>
+            <div class="footer-right">
+                <p>Last updated August 21st</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function sortTableBy(tableId, colIdx, asc) {
+            const table = document.getElementById(tableId);
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            rows.sort((a, b) => {
+                let t1 = a.cells[colIdx].textContent.trim().toLowerCase();
+                let t2 = b.cells[colIdx].textContent.trim().toLowerCase();
+                if (t1 < t2) return asc ? -1 : 1;
+                if (t1 > t2) return asc ? 1 : -1;
+                return 0;
+            });
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Read table
+            let readAsc = {0: false, 1: false};
+            document.querySelectorAll('#readTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    readAsc[idx] = !readAsc[idx];
+                    sortTableBy('readTable', idx, readAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = readAsc[idx] ? '↑' : '↓';
+                    document.querySelectorAll('#readTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+            // TBR table
+            let tbrAsc = {0: false, 1: false};
+            document.querySelectorAll('#tbrTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    tbrAsc[idx] = !tbrAsc[idx];
+                    sortTableBy('tbrTable', idx, tbrAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = tbrAsc[idx] ? '↑' : '↓';
+                    document.querySelectorAll('#tbrTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

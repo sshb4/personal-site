@@ -1,3 +1,18 @@
+/* Vinyls page table and sorting styles */
+.vinyl-table th, .vinyl-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+.vinyl-table th { cursor: pointer; background: #f4f4f4; }
+.sortable { cursor: pointer; user-select: none; position: relative; }
+.sort-arrow { font-size: 1em; position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+.vinyl-img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; }
+.add-form { margin-bottom: 1.5rem; }
+.add-form input { margin-right: 0.5rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin: 2rem 0 1rem 0; }
+.main-content { flex: 2; }
+.sidebar-content { flex: 1; margin-left: 2rem; }
+@media (max-width: 900px) {
+    .magazine-layout { flex-direction: column; }
+    .sidebar-content { margin-left: 0; margin-top: 2rem; }
+}
 
 /* This would be in main.css */
 :root {
