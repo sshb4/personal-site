@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Travel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="masthead">
+        <div class="masthead-left">
+            <h1 class="site-title"><a href="index.html" style="color:inherit; text-decoration:none;">Sasha's Archive</a></h1>
+            <p class="issue-date">All the stuff I like</p>
+        </div>
+    </header>
+    <main class="magazine-layout" style="display: flex; align-items: flex-start;">
+        <div class="main-content">
+            <section>
+                <h2 class="section-title">Past Trips</h2>
+                <table class="vinyl-table" id="pastTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="destination" class="sortable">Destination<span class="sort-arrow">↓</span></th>
+                            <th data-sort="date" class="sortable">Date<span class="sort-arrow">↓</span></th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>San Diego</td><td>2010</td><td></td></tr>
+                        <tr><td>Disney</td><td>2011</td><td></td></tr>
+                        <tr><td>San Diego/Legoland</td><td>2012</td><td></td></tr>
+                        <tr><td>Universal Studios</td><td>2013</td><td>x2</td></tr>
+                        <tr><td>Disney</td><td>2013-2014</td><td>x6</td></tr>
+                        <tr><td>Hawaii</td><td>2015</td><td></td></tr>
+                        <tr><td>DC</td><td>2015</td><td></td></tr>
+                        <tr><td>Moab</td><td>2016</td><td></td></tr>
+                        <tr><td>Catalina/Legoland</td><td>2017</td><td></td></tr>
+                        <tr><td>Legoland</td><td>2017</td><td></td></tr>
+                        <tr><td>Winter Quarters, Nebraska</td><td>2019</td><td></td></tr>
+                        <tr><td>Yellowstone National Park</td><td>June 2020</td><td></td></tr>
+                        <tr><td>Mexico cruise</td><td>January 2023</td><td></td></tr>
+                        <tr><td>Hawaii</td><td>Christmas 2024</td><td></td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2 class="section-title">Upcoming Trips</h2>
+                <table class="vinyl-table" id="upcomingTable" style="width:100%; border-collapse: collapse; margin-bottom: 2rem;">
+                    <thead>
+                        <tr>
+                            <th data-sort="destination" class="sortable">Destination<span class="sort-arrow">↓</span></th>
+                            <th data-sort="date" class="sortable">Date<span class="sort-arrow">↓</span></th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Lake Powell</td><td>March 2026</td><td></td></tr>
+                        <tr><td>NYC</td><td>Summer 2026</td><td></td></tr>
+                        <tr><td>Alicante, Spain</td><td>August 2026</td><td></td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Travel Stats</h4>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" id="statesCount">0</div>
+                        <div class="stat-label">States Visited</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" id="countriesCount">0</div>
+                        <div class="stat-label">Countries Visited</div>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">States Visited</h4>
+                <ul class="recent-list" id="statesList">
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Countries Visited</h4>
+                <ul class="recent-list" id="countriesList">
+                </ul>
+            </div>
+            <div class="sidebar-section">
+                <h4 class="sidebar-title">Quick Links</h4>
+                <nav class="quick-nav">
+                    <a href="index.html" class="quick-link">Home</a>
+                    <a href="#pastTable" class="quick-link">Past</a>
+                    <a href="#upcomingTable" class="quick-link">Upcoming</a>
+                </nav>
+            </div>
+        </div>
+    </main>
+    <footer class="magazine-footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <p>&copy; 2025 Personal Archive.</p>
+            </div>
+            <div class="footer-right">
+                <p>Last updated October 20th</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Travel data - edit these arrays to add your travels
+        const states = [
+            "Arizona",
+            "California", 
+            "Colorado",
+            "DC",
+            "Hawaii",
+            "Idaho",
+            "Iowa",
+            "Maryland",
+            "Montana",
+            "Nebraska", 
+            "Nevada",
+            "Utah",
+            "Wyoming"
+        ];
+        
+        const countries = [
+            "Mexico",
+            "USA"
+        ];
+
+        function sortTableBy(tableId, colIdx, asc) {
+            const table = document.getElementById(tableId);
+            const tbody = table.tBodies[0];
+            const rows = Array.from(tbody.rows);
+            rows.sort((a, b) => {
+                let t1 = a.cells[colIdx].textContent.trim().toLowerCase();
+                let t2 = b.cells[colIdx].textContent.trim().toLowerCase();
+                if (t1 < t2) return asc ? -1 : 1;
+                if (t1 > t2) return asc ? 1 : -1;
+                return 0;
+            });
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        function updateStats() {
+            document.getElementById('statesCount').textContent = states.length;
+            document.getElementById('countriesCount').textContent = countries.length;
+            
+            // Update states list
+            const statesList = document.getElementById('statesList');
+            statesList.innerHTML = states.map(state => `<li class="recent-item">${state}</li>`).join('');
+            
+            // Update countries list
+            const countriesList = document.getElementById('countriesList');
+            countriesList.innerHTML = countries.map(country => `<li class="recent-item">${country}</li>`).join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateStats();
+            
+            // Past table sorting
+            let pastAsc = {0: false, 1: false, 2: false};
+            document.querySelectorAll('#pastTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    pastAsc[idx] = !pastAsc[idx];
+                    sortTableBy('pastTable', idx, pastAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = pastAsc[idx] ? '↑' : '↓';
+                    document.querySelectorAll('#pastTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+            
+            // Upcoming table sorting
+            let upcomingAsc = {0: false, 1: false, 2: false};
+            document.querySelectorAll('#upcomingTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    upcomingAsc[idx] = !upcomingAsc[idx];
+                    sortTableBy('upcomingTable', idx, upcomingAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = upcomingAsc[idx] ? '↑' : '↓';
+                    document.querySelectorAll('#upcomingTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+            
+            // Wishlist table sorting
+            let wishlistAsc = {0: false, 1: false, 2: false};
+            document.querySelectorAll('#wishlistTable th.sortable').forEach((th, idx) => {
+                th.addEventListener('click', function() {
+                    wishlistAsc[idx] = !wishlistAsc[idx];
+                    sortTableBy('wishlistTable', idx, wishlistAsc[idx]);
+                    th.querySelector('.sort-arrow').textContent = wishlistAsc[idx] ? '↑' : '↓';
+                    document.querySelectorAll('#wishlistTable th.sortable').forEach((oth, oidx) => {
+                        if (oth !== th) oth.querySelector('.sort-arrow').textContent = '';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
